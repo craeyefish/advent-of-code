@@ -331,7 +331,6 @@ export class Q7Component implements OnInit {
 
     let h1 = r1.cards;
     let h2 = r2.cards;
-    console.log('comparing: ' + r1.cards + ' to ' + r2.cards);
     for (let i = 0; i < h1.length; i++) {
       let val1 = parseInt(h1[i]);
       if (val1 == undefined || Number.isNaN(val1)) {
