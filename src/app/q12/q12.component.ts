@@ -47,11 +47,13 @@ export class Q12Component implements OnInit {
     let total = 0;
 
     let inititalTotals: number[] = [];
-    let forwardTotals: number[] = [];
-    let backwardTotals: number[] = [];
+    let qBeforeTotals: number[] = [];
+    let qAfterTotals: number[] = [];
     let finalTotals: number[] = [];
+    let sumTotals: number[] = [];
 
     // Calculate vanilla strings
+    console.log('calculating vanilla');
     for (var i = 0; i < arr.length; i++) {
       let rowTotal = 0;
       let input = arr[i].split(' ')[0];
@@ -61,60 +63,69 @@ export class Q12Component implements OnInit {
         .map((x) => parseInt(x));
 
       rowTotal = this.calc(input, nums);
-
       inititalTotals.push(rowTotal);
     }
 
-    // Calculate string + "?"
+    // Calculate "?" + string
+    console.log('calculating ? + string');
     for (var i = 0; i < arr.length; i++) {
       let rowTotal = 0;
       let inputT = arr[i].split(' ')[0];
+      let input = '?' + inputT;
       let nums = arr[i]
         .split(' ')[1]
         .split(',')
         .map((x) => parseInt(x));
 
-      let input = '';
-      let isQ = false;
-
-      if (inputT[inputT.length - 1] == '.') {
-        input = '?' + inputT;
-      } else if (inputT[inputT.length - 1] == '#') {
-        input = inputT;
-      } else if (inputT[inputT.length - 1] == '?') {
-        isQ = true;
-        input = '?' + inputT;
-      }
-
-      rowTotal = this.calc(input, nums);
-
-      if (!isQ) {
-        forwardTotals.push(rowTotal);
-        finalTotals.push(rowTotal);
+      if (inputT[inputT.length - 1] == '#') {
+        qBeforeTotals.push(0);
         continue;
       }
 
-      input = inputT + '?';
+      rowTotal = this.calc(input, nums);
+      qBeforeTotals.push(rowTotal);
+    }
 
-      let rowTotal2 = this.calc(input, nums);
+    // Calculate string + "?"
+    console.log('calculating string + ?');
+    for (var i = 0; i < arr.length; i++) {
+      let rowTotal = 0;
+      let inputT = arr[i].split(' ')[0];
+      let input = inputT + '?';
+      let nums = arr[i]
+        .split(' ')[1]
+        .split(',')
+        .map((x) => parseInt(x));
 
-      if (rowTotal2 > rowTotal) {
-        rowTotal = rowTotal2;
+      if (inputT[0] == '#') {
+        qAfterTotals.push(0);
+        continue;
       }
 
-      forwardTotals.push(rowTotal);
-      finalTotals.push(rowTotal);
+      rowTotal = this.calc(input, nums);
+      qAfterTotals.push(rowTotal);
     }
 
     console.log(inititalTotals);
-    console.log(forwardTotals);
-    console.log(backwardTotals);
-    console.log(finalTotals);
+    console.log(qBeforeTotals);
+    console.log(qAfterTotals);
+
     for (var i = 0; i < inititalTotals.length; i++) {
-      let cur = inititalTotals[i] * Math.pow(finalTotals[i], 4);
-      console.log(cur);
+      let bigger =
+        qBeforeTotals[i] > qAfterTotals[i] ? qBeforeTotals[i] : qAfterTotals[i];
+      bigger = bigger == 0 ? inititalTotals[i] : bigger;
+      finalTotals.push(bigger);
+
+      let cur1 = inititalTotals[i] * Math.pow(bigger, 4);
+      let cur2 = bigger * Math.pow(inititalTotals[i], 4);
+
+      let cur = cur1 > cur2 ? cur1 : cur2;
+
+      sumTotals.push(cur);
       total += cur;
     }
+    console.log(finalTotals);
+    console.log(sumTotals);
 
     this.q12Answer2 = total.toString();
   }
