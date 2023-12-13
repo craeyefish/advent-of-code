@@ -37,7 +37,11 @@ export class Q12Component implements OnInit {
         .split(',')
         .map((x) => parseInt(x));
 
-      total += this.calc(input, nums);
+      console.log(input);
+      console.log(nums);
+      rowTotal = this.calc(input, nums);
+      total += rowTotal;
+      console.log(rowTotal);
     }
 
     this.q12Answer1 = total.toString();
@@ -113,7 +117,11 @@ export class Q12Component implements OnInit {
     for (var i = 0; i < inititalTotals.length; i++) {
       let bigger =
         qBeforeTotals[i] > qAfterTotals[i] ? qBeforeTotals[i] : qAfterTotals[i];
+      if (bigger == 0) {
+        console.log('zero: ' + (i + 1));
+      }
       bigger = bigger == 0 ? inititalTotals[i] : bigger;
+
       finalTotals.push(bigger);
 
       let cur1 = inititalTotals[i] * Math.pow(bigger, 4);
@@ -140,7 +148,10 @@ export class Q12Component implements OnInit {
       }
     }
 
-    for (var j = 0; j < Math.pow(2, qCount); j++) {
+    console.log('qcount: ' + qCount);
+
+    let max = Math.pow(2, qCount);
+    for (var j = 0; j < max; j++) {
       let qInput = '';
       for (var k = 0; k < qCount; k++) {
         if (j & Math.pow(2, k)) {
@@ -159,6 +170,10 @@ export class Q12Component implements OnInit {
 
       if (this.isPossible(modInput, nums)) {
         count += 1;
+      }
+
+      if (j % 1000000 == 0) {
+        console.log(j / max);
       }
     }
 
