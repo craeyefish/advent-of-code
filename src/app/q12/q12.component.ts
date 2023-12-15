@@ -21,13 +21,14 @@ export class Q12Component implements OnInit {
       .get('assets/q12.txt', { responseType: 'text' })
       .subscribe((data) => {
         var arr = data.split(/\r?\n/);
-        // this.a12a(arr);
-        this.a12b(arr);
+        this.a12a(arr);
+        // this.a12b(arr);
       });
   }
 
   a12a(arr: string[]): void {
     let total = 0;
+    let rts: number[] = [];
 
     for (var i = 0; i < arr.length; i++) {
       let rowTotal = 0;
@@ -41,9 +42,11 @@ export class Q12Component implements OnInit {
       console.log(nums);
       rowTotal = this.calc(input, nums);
       total += rowTotal;
+      rts.push(rowTotal);
       console.log(rowTotal);
     }
 
+    console.log(rts);
     this.q12Answer1 = total.toString();
   }
 
