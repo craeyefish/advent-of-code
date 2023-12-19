@@ -22,9 +22,11 @@ import { Q13Component } from './q13/q13.component';
 import { Q14Component } from './q14/q14.component';
 import { Q15Component } from './q15/q15.component';
 import { Q16Component } from './q16/q16.component';
+import { Q17Component } from './q17/q17.component';
+import { Q18Component } from './q18/q18.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, Q1Component, Q2Component, Q3Component, Q4Component, Q5Component, Q6Component, Q7Component, Q8Component, Q9Component, Q10Component, Q11Component, Q12Component, Q13Component, Q14Component, Q15Component, Q16Component],
+  declarations: [AppComponent, HomeComponent, Q1Component, Q2Component, Q3Component, Q4Component, Q5Component, Q6Component, Q7Component, Q8Component, Q9Component, Q10Component, Q11Component, Q12Component, Q13Component, Q14Component, Q15Component, Q16Component, Q17Component, Q18Component],
   imports: [
     BrowserModule,
     MatExpansionModule,
