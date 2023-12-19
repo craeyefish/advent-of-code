@@ -49,6 +49,26 @@ export class Q17Component implements OnInit {
 
   // 1402 wrong
   // 1401 wrong
+  // 1400 wrong
+  // 1399 wrong
+  // 1398 wrong
+  // 1397 wrong
+  // 1396 wrong
+  // 1395 wrong
+  // 1394 wrong
+  // 1393 wrong
+  // 1392 wrong
+  // 1391 w
+  // 1390 w
+  // 1389
+  // 1388
+  // 1387
+  // 1386
+  // 1385
+  // 1384
+  // 1383
+  // 1382
+  // 1381
   a17a(arr: string[]): void {
     let total = 100000;
     let moves: Move[] = [];
@@ -79,11 +99,11 @@ export class Q17Component implements OnInit {
         let multiplier2 = 200 + Math.round(Math.random() * 800); // was 800
         let multiplier3 = 9 + Math.round(Math.random() * 6); // was 12
 
-        for (var i = 0; i < 100000; i++) {
+        for (var i = 0; i < 1000; i++) {
           moves = [];
           moves.push(chosenMoves[chosenMoves.length - 1]);
           let heat = 0;
-          for (var j = 0; j < 44; j++) {
+          for (var j = 0; j < 12; j++) {
             if (moves[moves.length - 1].dir == 'end') {
               continue;
             }
@@ -109,7 +129,7 @@ export class Q17Component implements OnInit {
         }
 
         // console.log(bestMoves[bestMoves.length - 1]);
-        chosenMoves.push(...bestMoves.slice(1));
+        chosenMoves.push(...bestMoves.slice(1, 3));
 
         iter += 1;
       }
